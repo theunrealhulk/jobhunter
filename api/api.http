@@ -1,6 +1,29 @@
 @api_HostAddress = http://localhost:5046
-
-GET {{api_HostAddress}}/weatherforecast/
+@token = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicGV0ZXIxMjMiLCJleHAiOjE3NzU4MTk5MTksImlzcyI6IkpPQi1ILUkiLCJhdWQiOiJKT0ItSC1BIn0.0QY3x6X8hzSobEZ_KX4BM4lf-EHRwhIiQEf-q7HrBY8GTID4ogiIUV-Y8hO17jzDwB3NFLQm2_kRivFDohw5tA
+POST {{api_HostAddress}}/api/auth/register
 Accept: application/json
+Content-Type: application/json
 
+{
+    "username":"peter123",
+    "password":"P@rker123",
+    "email": "somewhereQ@mail.work",
+    "firstname": "john",
+    "lastname": "doe"
+}
 ###
+POST {{api_HostAddress}}/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username":"peter123",
+  "password":"P@rker123"
+}
+###
+POST {{api_HostAddress}}/api/auth/logout
+Accept: application/json
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{}
