@@ -17,6 +17,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddSingleton<IConfigurationService, ConfigurationService>();
 builder.Services.AddJwtAuthentication();
 builder.Services.AddAuthorization();
+builder.Services.AddSingleton<ITokenService, TokenService>();
 // Auto-discover and register all endpoints
 var endpointTypes = typeof(Program).Assembly.GetTypes()
     .Where(t => typeof(IEndpoint).IsAssignableFrom(t) && t is { IsInterface: false, IsAbstract: false });

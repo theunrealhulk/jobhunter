@@ -1,5 +1,5 @@
 @api_HostAddress = http://localhost:5046
-@token = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicGV0ZXIxMjMiLCJleHAiOjE3NzU4MTk5MTksImlzcyI6IkpPQi1ILUkiLCJhdWQiOiJKT0ItSC1BIn0.0QY3x6X8hzSobEZ_KX4BM4lf-EHRwhIiQEf-q7HrBY8GTID4ogiIUV-Y8hO17jzDwB3NFLQm2_kRivFDohw5tA
+@token = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicGV0ZXIxMjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJzb21ld2hlcmVRQG1haWwud29yayIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlVzZXIiLCJleHAiOjE3NzU4MzYxODAsImlzcyI6IkpPQi1ILUkiLCJhdWQiOiJKT0ItSC1BIn0.wc5wvRWXHnYuZdvzMpti0LgCkuP7lwYzF0B1p9eAgGoR6id-OvHWiIddJ7F4itS3ivSdgBZAFoPa7ybqCPxGnw
 POST {{api_HostAddress}}/api/auth/register
 Accept: application/json
 Content-Type: application/json
@@ -22,6 +22,13 @@ Content-Type: application/json
 }
 ###
 POST {{api_HostAddress}}/api/auth/logout
+Accept: application/json
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{}
+###
+POST {{api_HostAddress}}/api/auth/refresh
 Accept: application/json
 Authorization: Bearer {{token}}
 Content-Type: application/json
