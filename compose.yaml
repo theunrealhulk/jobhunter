@@ -11,6 +11,25 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: jobhunter_api
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    env_file:
+      - api/.env
+    ports:
+      - "5046:5046"
+    volumes:
+      - ./api:/app  
+    depends_on:
+      - postgres
+
 volumes:
   postgres_data:
 
