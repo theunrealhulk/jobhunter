@@ -10,6 +10,7 @@ DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = new ConfigurationService().GetConnectionString();
+var appUrl = Environment.GetEnvironmentVariable("APP_URL")!;
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Configuration.AddEnvironmentVariables();
@@ -19,6 +20,7 @@ builder.Services.AddJwtAuthentication();
 builder.Services.AddAuthorization();
 builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddSingleton<IEmailService, EmailService>();
+builder.Services.AddCors();
 // Auto-discover and register all endpoints
 var endpointTypes = typeof(Program).Assembly.GetTypes()
     .Where(t => typeof(IEndpoint).IsAssignableFrom(t) && t is { IsInterface: false, IsAbstract: false });
@@ -30,7 +32,13 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
+app.UseCors(options =>
+{
+    options.WithOrigins(appUrl)  // Allow your frontend
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();  // For cookies/auth
+});
 app.UseHttpsRedirection();
 // Map all endpoints
 using (var scope = app.Services.CreateScope())

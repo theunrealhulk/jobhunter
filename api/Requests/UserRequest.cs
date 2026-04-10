@@ -15,6 +15,6 @@ public record UserRegisterRequest(
 );
 
 public record UserLoginRequest(
-    [Required][MinLength(5)]string Username,
+    [Required][EmailAddress]string Email,
     [Required]string Password
 );

@@ -46,7 +46,7 @@ public class AuthEndpoints :IEndpoint
     
     private  static async Task<IResult> Login(UserLoginRequest request,AppDbContext db,ITokenService tokenService,HttpContext context)
     {
-        var user = await db.Users.FirstOrDefaultAsync(x => x.Username == request.Username);
+        var user = await db.Users.FirstOrDefaultAsync(x =>  x.Email == request.Email);
 
         if (user == null|| new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, request.Password) ==
             PasswordVerificationResult.Failed)

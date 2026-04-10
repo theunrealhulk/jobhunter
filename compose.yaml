@@ -29,7 +29,16 @@ services:
       - ./api:/app  
     depends_on:
       - postgres
-
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    volumes:
+      - ./admin:/app
+    ports:
+      - "3003:3003"
+    depends_on:
+      - api
 volumes:
   postgres_data:
 
